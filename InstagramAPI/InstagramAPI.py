@@ -650,6 +650,9 @@ class InstagramAPI:
     def getUsernameInfo(self, usernameId):
         return self.SendRequest('users/' + str(usernameId) + '/info/')
 
+    def getInfoByName(self, username):
+        return self.SendRequest('users/' + str(username) + '/usernameinfo/')
+
     def getSelfUsernameInfo(self):
         return self.getUsernameInfo(self.username_id)
 
@@ -663,6 +666,8 @@ class InstagramAPI:
     def getFollowingRecentActivity(self):
         activity = self.SendRequest('news/?')
         return activity
+
+    def getFollowers()
 
     def getv2Inbox(self):
         inbox = self.SendRequest('direct_v2/inbox/?')
@@ -870,6 +875,13 @@ class InstagramAPI:
 
     def getLikedMedia(self, maxid=''):
         return self.SendRequest('feed/liked/?max_id=' + str(maxid))
+
+    def getLikers(self, mediaId):
+        data = json.dumps({'_uuid': self.uuid,
+                           '_uid': self.username_id,
+                           '_csrftoken': self.token,
+                           'media_id': mediaId})
+        return self.SendRequest('media/' + str(mediaId) + '/likers/', self.generateSignature(data))
 
     def generateSignature(self, data, skip_quote=False):
         if not skip_quote:
