@@ -667,8 +667,6 @@ class InstagramAPI:
         activity = self.SendRequest('news/?')
         return activity
 
-    def getFollowers()
-
     def getv2Inbox(self):
         inbox = self.SendRequest('direct_v2/inbox/?')
         return inbox
